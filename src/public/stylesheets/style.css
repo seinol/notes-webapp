@@ -1,0 +1,58 @@
+body {
+    padding: 10px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+    color: #00B7FF;
+}
+
+button {
+    width: 140px;
+    height: 30px;
+    background-color: transparent;
+    border: 1px solid lightgrey;
+    transition-duration: 0.2s;
+    cursor: pointer;
+    outline: none;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: lightgrey;
+}
+
+.active {
+    background-color: lightgrey;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+#first-row, #second-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+#second-row {
+    margin-top: 10px;
+}
+
+.note-row {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.note-content-row {
+    display: flex;
+    flex-direction: column;
+}
+
+.note-content-title-row {
+    display: flex;
+    justify-content: space-between;
+}
