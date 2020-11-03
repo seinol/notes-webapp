@@ -1,0 +1,57 @@
+<header>
+    <section id="first-row">
+        <form action="/note" method="get">
+            <button type="submit">Create new note</button>
+        </form>
+        <form action="/" method="post">
+            <button type="submit">Change style</button>
+            <input type="hidden" name="darkTheme" value="true">
+        </form>
+    </section>
+    <section id="second-row">
+        <div>
+            <form action="/" method="post">
+                <button type="submit">By finish date</button>
+                <input type="hidden" name="sortedBy" value="dueToDate">
+            </form>
+            <form action="/" method="post">
+                <button type="submit">By create date</button>
+                <input type="hidden" name="sortedBy" value="createDate">
+            </form>
+            <form action="/" method="post">
+                <button type="submit">By importance</button>
+                <input type="hidden" name="sortedBy" value="importance">
+            </form>
+        </div>
+        <div>
+            <form action="/" method="post">
+                <button type="submit">Show finished notes</button>
+                <input type="hidden" name="showFinished" value="true">
+            </form>
+        </div>
+    </section>
+</header>
+<main class="note-row">
+    {{#each this.notes}}
+        <form action="/note/{{this._id}}" method="get">
+            <div>
+                <input id="finished-note" type="checkbox" disabled {{#if this._finished}}checked{{/if}}>
+                <label for="finished-note">Finished</label>
+            </div>
+
+            <div class="note-content-row">
+                {{displayDate this._dueToDate}}
+                <div class="note-content-title-row">
+                    <label for="note-text">{{this._title}}</label>
+                    <span>{{this._importance}}</span>
+                </div>
+                <div>
+                    <textarea id="note-text" name="Note text" rows="3" cols="60">{{this._description}}</textarea>
+                </div>
+            </div>
+            <div>
+                <button type="button">Edit</button>
+            </div>
+        </form>
+    {{/each}}
+</main>

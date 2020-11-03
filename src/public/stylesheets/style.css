@@ -22,10 +22,6 @@ button:hover {
     background-color: lightgrey;
 }
 
-.active {
-    background-color: lightgrey;
-}
-
 .container {
     display: flex;
     flex-direction: column;
