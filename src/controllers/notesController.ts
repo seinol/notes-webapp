@@ -1,42 +1,38 @@
 import notesService from '../services/notesService';
 import { Request, Response } from 'express';
+import Note from '../services/Note';
 
-async function index({session}: Request, req: Response) {
+async function index({session}: Request, res: Response) {
     if (session!.ascending === undefined) session!.ascending = true;
     if (session!.showFinished === undefined) session!.showFinished = false;
     if (session!.darkTheme === undefined) session!.darkTheme = false;
 
-    console.log('SortedBy ' + session!.sortedBy);
-    console.log('Ascending ' + session!.ascending);
-    console.log('ShowFinished ' + session!.showFinished);
-    console.log('DarkTheme ' + session!.darkTheme);
-
     switch (session!.sortedBy) {
         case 'createDate': {
-            req.render('index', {
+            res.render('index', {
                 'notes': await notesService.getAllSortedByCreateDate(session!.ascending, session!.showFinished),
-                'darkTheme': session!.darkTheme
+                'theme': getTheme(session!.darkTheme)
             });
             break;
         }
         case 'importance': {
-            req.render('index', {
+            res.render('index', {
                 'notes': await notesService.getAllSortedByImportance(session!.ascending, session!.showFinished),
-                'darkTheme': session!.darkTheme
+                'theme': getTheme(session!.darkTheme)
             });
             break;
         }
         case 'dueToDate':
         default: {
-            req.render('index', {
+            res.render('index', {
                 'notes': await notesService.getAllSortedByDueToDate(session!.ascending, session!.showFinished),
-                'darkTheme': session!.darkTheme
+                'theme': getTheme(session!.darkTheme)
             });
         }
     }
 }
 
-async function setSession({body, session}: Request, req: Response) {
+async function setSession({body, session}: Request, res: Response) {
     if (body.sortedBy) {
         if (session!.sortedBy === body.sortedBy) {
             session!.ascending = !session!.ascending;
@@ -46,41 +42,53 @@ async function setSession({body, session}: Request, req: Response) {
         }
     }
 
-    if (body.ascending) session!.ascending = !session!.ascending;
     if (body.showFinished) session!.showFinished = !session!.showFinished;
     if (body.darkTheme) session!.darkTheme = !session!.darkTheme;
-
-    req.redirect('/');
+    res.redirect('/');
 }
 
-async function showCreate(req: Request, res: Response) {
-
+async function showNote({params, session}: Request, res: Response) {
+    const note = params.id ? await notesService.getOne(params.id) : {}
+    res.render('note', {
+        'note': note,
+        'theme': getTheme(session!.darkTheme)
+    });
 }
 
-async function create(req: Request, res: Response) {
-    res.send('index');
+async function create({body}: Request, res: Response) {
+    await notesService.create(
+        new Note(body.title, body.description, +body.importance, new Date, new Date(body.dueToDate), !!body.finished)
+    );
+    res.status(201);
+    res.redirect('/');
 }
 
 async function createSample(req: Request, res: Response) {
     await notesService.createRandomNote();
+    res.status(201);
     res.redirect('/');
 }
 
-async function showUpdate(req: Request, res: Response) {
-
-}
-
-async function update(req: Request, res: Response) {
-
-}
-
-async function finishNote(req: Request, res: Response) {
-
+async function update({params, body}: Request, res: Response) {
+    const note = await notesService.getOne(params.id);
+    note._title = body.title;
+    note._description = body.description;
+    note._importance = +body.importance;
+    note._dueToDate = new Date(body.dueToDate);
+    note._finished = !!body.finished;
+    await notesService.update(params.id, note);
+    res.status(200);
+    res.redirect('/');
 }
 
 async function reset(req: Request, res: Response) {
     await notesService.deleteAll();
+    res.status(200);
     res.redirect('/');
 }
 
-export default {index, setSession, showCreate, create, createSample, showUpdate, update, finishNote, reset};
+function getTheme(darkTheme: boolean) {
+    return darkTheme ? 'dark' : 'light';
+}
+
+export default {index, setSession, showNote, create, createSample, update, reset};

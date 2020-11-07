@@ -1,7 +1,7 @@
 import express from 'express';
 import session from 'express-session';
 import path from 'path';
-import router from './router';
+import router from './routes/router';
 import expressHbs from 'express-handlebars';
 import appConfigs from './config/app';
 
@@ -10,14 +10,20 @@ app.disable('x-powered-by');
 
 const hbs = expressHbs.create({
     helpers: {
-        displayDate: function (date: string) {
-            return new Date(date).toISOString().substring(0, 10);
+        'displayDate'(date: Date) {
+            return date.toISOString().substring(0, 10);
+        },
+        'equal'(first: string, second: string, options: any) {
+            return first === second ? options.fn() : options.inverse()
+        },
+        'equalNumber'(first: number, second: number, options: any) {
+            return first === second ? options.fn() : options.inverse()
         }
     }
 })
 
 app.engine('handlebars', hbs.engine);
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.resolve('src/views'));
 app.set('view engine', 'handlebars');
 
 app.use(session({
@@ -26,9 +32,8 @@ app.use(session({
     saveUninitialized: true
 }));
 
-app.use(express.json());
 app.use(express.urlencoded({extended: false}));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(path.resolve(), 'src/public')));
 
 app.use(router);
 

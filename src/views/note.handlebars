@@ -1,0 +1,36 @@
+{{#with note}}
+    {{#if _id}}
+        <h1>Edit {{_title}}</h1>
+    {{else}}
+        <h1>Create note</h1>
+    {{/if}}
+
+    <form action='/note{{#if _id}}/{{_id}}{{/if}}' method='post'>
+        <label for="title">Title</label>
+        <input id="title" name="title" type="text" required value="{{_title}}">
+
+        <label for="description">Description</label>
+        <textarea id="description" name="description">{{_description}}</textarea>
+
+        <label for="due-to-date">Due to date</label>
+        <input id="due-to-date" name="dueToDate" type="date" required
+               value="{{#if _dueToDate}}{{displayDate _dueToDate}}{{/if}}">
+
+        <label for="importance"></label>
+        <select id="importance" name="importance">
+            <option value="1" {{#equalNumber _importance 1}}selected{{/equalNumber}}>1</option>
+            <option value="2" {{#equalNumber _importance 2}}selected{{/equalNumber}}>2</option>
+            <option value="3" {{#equalNumber _importance 3}}selected{{/equalNumber}}>3</option>
+            <option value="4" {{#equalNumber _importance 4}}selected{{/equalNumber}}>4</option>
+            <option value="5" {{#equalNumber _importance 5}}selected{{/equalNumber}}>5</option>
+        </select>
+
+        <input id="finished" name="finished" type="checkbox" {{#if _finished}}checked{{/if}}>
+        <label for="finished">Finished</label>
+
+        <button type="submit">Save</button>
+        <button onclick="window.location.href='/'">Cancel</button>
+
+    </form>
+
+{{/with}}

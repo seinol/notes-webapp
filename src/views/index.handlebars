@@ -4,7 +4,13 @@
             <button type="submit">Create new note</button>
         </form>
         <form action="/" method="post">
-            <button type="submit">Change style</button>
+            <button type="submit">
+                {{#equal theme "light"}}
+                    Enable dark mode
+                {{else}}
+                    Enable light mode
+                {{/equal}}
+            </button>
             <input type="hidden" name="darkTheme" value="true">
         </form>
     </section>
@@ -46,11 +52,12 @@
                     <span>{{this._importance}}</span>
                 </div>
                 <div>
-                    <textarea id="note-text" name="Note text" rows="3" cols="60">{{this._description}}</textarea>
+                    <label for="note-description"></label>
+                    <textarea id="note-description" rows="3" cols="60" disabled>{{this._description}}</textarea>
                 </div>
             </div>
             <div>
-                <button type="button">Edit</button>
+                <button type="button" onclick="window.location.href='/note/{{this._id}}'">Edit</button>
             </div>
         </form>
     {{/each}}
