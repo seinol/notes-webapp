@@ -8,7 +8,7 @@ async function getOne(id: string): Promise<Note> {
     return db.findOne({_id: id});
 }
 
-//TODO fix return type
+//TODO fix return types
 async function getAllSortedByDueToDate(ascending: boolean, includeFinished: boolean): Promise<any> /*Promise<Nedb.Cursor<Document[]>>*/ {
     if (includeFinished) {
         return db.find({}).sort({_dueToDate: ascending ? 1 : -1});
@@ -36,7 +36,7 @@ async function create(note: Note): Promise<Note> {
 
 async function createRandomNote(): Promise<Note> {
     let testNote = new Note('Note' + Math.floor(Math.random() * 50), 'This is a description',
-        Math.floor(Math.random() * 5), new Date("2020-10-15"), new Date(), Math.random() >= 0.5);
+        Math.floor(Math.random() * 5), new Date('2020-10-15'), new Date(), Math.random() >= 0.5);
     return db.insert(testNote);
 }
 

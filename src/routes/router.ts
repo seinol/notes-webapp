@@ -1,6 +1,7 @@
 import express from 'express';
 
 import notesController from '../controllers/notesController';
+
 const router = express.Router();
 
 router.get('/', notesController.index);
