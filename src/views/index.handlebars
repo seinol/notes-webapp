@@ -38,27 +38,31 @@
     </section>
 </header>
 <main class="note-row">
-    {{#each this.notes}}
-        <form action="/note/{{this._id}}" method="get">
-            <div>
-                <input id="finished-note" type="checkbox" disabled {{#if this._finished}}checked{{/if}}>
-                <label for="finished-note">Finished</label>
-            </div>
+    {{#if notes}}
+        {{#each this.notes}}
+            <form action="/note/{{this._id}}" method="get">
+                <div>
+                    <input id="finished-note" type="checkbox" disabled {{#if this._finished}}checked{{/if}}>
+                    <label for="finished-note">Finished</label>
+                </div>
 
-            <div class="note-content-row">
-                {{displayDate this._dueToDate}}
-                <div class="note-content-title-row">
-                    <label for="note-text">{{this._title}}</label>
-                    <span>{{this._importance}}</span>
+                <div class="note-content-row">
+                    {{displayDate this._dueToDate}}
+                    <div class="note-content-title-row">
+                        <label for="note-text">{{this._title}}</label>
+                        <span>{{this._importance}}</span>
+                    </div>
+                    <div>
+                        <label for="note-description"></label>
+                        <textarea id="note-description" rows="3" cols="60" disabled>{{this._description}}</textarea>
+                    </div>
                 </div>
                 <div>
-                    <label for="note-description"></label>
-                    <textarea id="note-description" rows="3" cols="60" disabled>{{this._description}}</textarea>
+                    <button type="button" onclick="window.location.href='/note/{{this._id}}'">Edit</button>
                 </div>
-            </div>
-            <div>
-                <button type="button" onclick="window.location.href='/note/{{this._id}}'">Edit</button>
-            </div>
-        </form>
-    {{/each}}
+            </form>
+        {{/each}}
+    {{else}}
+        <p>No notes available yet!</p>
+    {{/if}}
 </main>
