@@ -8,7 +8,7 @@
                 {{#equal theme "light"}}
                     Enable dark mode
                 {{else}}
-                    Enable light mode
+                    Disable dark mode
                 {{/equal}}
             </button>
             <input type="hidden" name="darkTheme" value="true">
@@ -31,7 +31,10 @@
         </div>
         <div>
             <form action="/" method="post">
-                <button type="submit">Show finished notes</button>
+                <button type="submit">
+                    {{#if showFinished}}Show{{else}}Hide{{/if}}
+                    finished notes
+                </button>
                 <input type="hidden" name="showFinished" value="true">
             </form>
         </div>
@@ -63,6 +66,11 @@
             </form>
         {{/each}}
     {{else}}
-        <p>No notes available yet!</p>
+        {{#if showFinished}}
+            <p>No notes available yet!</p>
+        {{else}}
+            <p>No open notes!</p>
+        {{/if}}
+
     {{/if}}
 </main>

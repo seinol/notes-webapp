@@ -11,14 +11,16 @@ async function index({session}: Request, res: Response) {
         case 'createDate': {
             res.render('index', {
                 'notes': await notesService.getAllSortedByCreateDate(session!.ascending, session!.showFinished),
-                'theme': getTheme(session!.darkTheme)
+                'theme': getTheme(session!.darkTheme),
+                'showFinished': session!.showFinished
             });
             break;
         }
         case 'importance': {
             res.render('index', {
                 'notes': await notesService.getAllSortedByImportance(session!.ascending, session!.showFinished),
-                'theme': getTheme(session!.darkTheme)
+                'theme': getTheme(session!.darkTheme),
+                'showFinished': session!.showFinished
             });
             break;
         }
@@ -26,7 +28,8 @@ async function index({session}: Request, res: Response) {
         default: {
             res.render('index', {
                 'notes': await notesService.getAllSortedByDueToDate(session!.ascending, session!.showFinished),
-                'theme': getTheme(session!.darkTheme)
+                'theme': getTheme(session!.darkTheme),
+                'showFinished': session!.showFinished
             });
         }
     }
@@ -51,7 +54,8 @@ async function showNote({params, session}: Request, res: Response) {
     const note = params.id ? await notesService.getOne(params.id) : {}
     res.render('note', {
         'note': note,
-        'theme': getTheme(session!.darkTheme)
+        'theme': getTheme(session!.darkTheme),
+        'showFinished': session!.showFinished
     });
 }
 
