@@ -1,0 +1,27 @@
+body, input, textarea, select, button, article {
+    background-color: #191b1c;
+    border-color: #797063 !important;
+    color: #f4f2ee;
+}
+
+::-webkit-scrollbar {
+    background-color: #222526;
+    color: #b4aca1;
+}
+
+::-webkit-scrollbar-corner {
+    background-color: #191b1c;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #484e51;
+}
+
+::selection {
+    background-color: #0051b3 !important;
+    color: #f4f2ee !important;
+}
+
+button:hover {
+    background-color: #797063;
+}
