@@ -47,6 +47,7 @@ async function setSession({body, session}: Request, res: Response) {
 
     if (body.showFinished) session!.showFinished = !session!.showFinished;
     if (body.darkTheme) session!.darkTheme = !session!.darkTheme;
+    res.status(201);
     res.redirect('/');
 }
 
@@ -67,8 +68,8 @@ async function create({body}: Request, res: Response) {
     res.redirect('/');
 }
 
-async function createSample(req: Request, res: Response) {
-    await notesService.createRandomNote();
+async function createSamples(req: Request, res: Response) {
+    await notesService.createRandomNotes();
     res.status(201);
     res.redirect('/');
 }
@@ -95,4 +96,4 @@ function getTheme(darkTheme: boolean) {
     return darkTheme ? 'dark' : 'light';
 }
 
-export default {index, setSession, showNote, create, createSample, update, reset};
+export default {index, setSession, showNote, create, createSamples, update, reset};

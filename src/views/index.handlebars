@@ -35,7 +35,7 @@
         <article>
             <form action="/" method="post">
                 <button type="submit">
-                    {{#if showFinished}}Show{{else}}Hide{{/if}}
+                    {{#if showFinished}}Hide{{else}}Show{{/if}}
                     finished notes
                 </button>
 
@@ -74,10 +74,13 @@
             </article>
         {{/each}}
     {{else}}
-        {{#if showFinished}}
-            <p class="no-notes-hint">No notes available yet!</p>
-        {{else}}
-            <p class="no-notes-hint">No open notes!</p>
-        {{/if}}
+        <p>
+            {{#if showFinished}}
+                <span class="no-notes-hint">No notes available yet!</span>
+            {{else}}
+                <span class="no-notes-hint">No open notes!</span>
+            {{/if}}
+            Create 10 sample notes <a href="/create-notes">here</a>.
+        </p>
     {{/if}}
 </main>

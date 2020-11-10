@@ -13,7 +13,7 @@ router.get('/note/:id', notesController.showNote)
 router.post('/note/:id', notesController.update);
 
 // Endpoints to make testing easier
-router.get('/create-note', notesController.createSample);
+router.get('/create-notes', notesController.createSamples);
 router.get('/reset', notesController.reset);
 
 export default router;

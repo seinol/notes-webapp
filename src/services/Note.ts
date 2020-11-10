@@ -6,7 +6,8 @@ class Note {
     _dueToDate: Date;
     _finished: boolean;
 
-    constructor(title: string, description: string, importance: number, createDate: Date, dueToDate: Date, finished = false) {
+    constructor(title: string, description: string, importance: number,
+                createDate: Date, dueToDate: Date, finished = false) {
         this._title = title;
         this._description = description;
         this._importance = importance;

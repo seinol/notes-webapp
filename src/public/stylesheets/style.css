@@ -90,6 +90,16 @@ header article {
     margin-bottom: 10px;
 }
 
+#startpage .no-notes-hint {
+    font-weight: bold;
+    font-size: 15px;
+}
+
+#startpage .no-notes-hint::after {
+    content: "\a\a";
+    white-space: pre;
+}
+
 
 /* Note create/detail */
 
@@ -97,7 +107,7 @@ header article {
     margin: 0 auto;
 }
 
-#note-view .note-view-content {
+#note-view #note-view-content {
     display: flex;
     flex-direction: column;
     margin-bottom: 25px;

@@ -8,7 +8,7 @@
 
         <article>
             <form action='/note{{#if _id}}/{{_id}}{{/if}}' method='post'>
-                <div class="note-view-content">
+                <div id="note-view-content">
                     <label for="title">Title</label>
                     <input id="title" name="title" type="text" required value="{{_title}}">
 
@@ -34,7 +34,7 @@
                     </span>
                 </div>
 
-                <div class="note-view-buttons">
+                <div>
                     <button type="submit">Save</button>
                     <button onclick="window.location.href='/'">Cancel</button>
                 </div>
