@@ -1,54 +1,121 @@
 body {
-    padding: 10px;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    margin: 0 auto;
+    max-width: 1360px;
 }
 
-a {
-    color: #00B7FF;
+input[type='checkbox'] {
+    width: 15px;
+    height: 15px;
+    margin: 0 3px 0 0;
 }
 
 button {
-    width: 140px;
-    height: 30px;
+    width: 170px;
+    height: 50px;
+    font-size: 15px;
+    font-weight: bold;
     background-color: transparent;
-    border: 1px solid lightgrey;
+    border: 3px solid lightgrey;
+    border-radius: 5px;
     transition-duration: 0.2s;
     cursor: pointer;
     outline: none;
-    border-radius: 5px;
+}
+
+button:not(:last-child) {
+    margin: 0 10px 10px 0;
 }
 
 button:hover {
     background-color: lightgrey;
 }
 
-.container {
-    display: flex;
-    flex-direction: column;
-}
-
-#first-row, #second-row {
+header section {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 10px;
 }
 
-#second-row {
+header article {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#startpage {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
     margin-top: 10px;
 }
 
-.note-row {
-    margin-top: 20px;
+#startpage button {
+    width: 80px;
+    height: 40px;
+    margin: 10px 0 0 0;
+}
+
+#startpage article {
+    margin: 0 10px 10px 0;
+    padding: 18px;
+    border: 2px solid lightgrey;
+    border-radius: 5px;
+}
+
+#startpage article form {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
 }
 
-.note-content-row {
+#startpage .note-content {
+    margin-right: 20px;
+}
+
+#startpage .note-header,
+.note-description,
+.note-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+#note-view {
+    margin: 0 auto;
+}
+
+#note-view .note-view-content {
     display: flex;
     flex-direction: column;
+    margin-bottom: 25px;
 }
 
-.note-content-title-row {
-    display: flex;
-    justify-content: space-between;
+#note-view label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+#note-view #title,
+#note-view #description,
+#note-view #due-to-date,
+#note-view #importance {
+    margin-bottom: 15px;
+}
+
+#note-view input,
+#note-view textarea,
+#note-view select {
+    padding: 5px;
+}
+
+#note-view input[type="date"] {
+    width: 125px;
+}
+
+#note-view select {
+    width: 140px;
 }

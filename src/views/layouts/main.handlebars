@@ -4,20 +4,17 @@
     <meta charset="utf-8" />
     <title>Notes</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    {{#equal theme "dark"}}
+        <link rel='stylesheet' href='/stylesheets/style-dark.css' />
+    {{/equal}}
 </head>
 <body>
 
 {{#equal theme "dark"}}
-    <p>
-        Hint: dark theme active!
-    </p>
+    Hint: dark theme active!
 {{/equal}}
 
-<div class="container">
-
-    {{{body}}}
-
-</div>
+{{{body}}}
 
 </body>
 </html>

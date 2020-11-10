@@ -1,5 +1,5 @@
 <header>
-    <section id="first-row">
+    <section>
         <form action="/note" method="get">
             <button type="submit">Create new note</button>
         </form>
@@ -14,8 +14,8 @@
             <input type="hidden" name="darkTheme" value="true">
         </form>
     </section>
-    <section id="second-row">
-        <div>
+    <section>
+        <article>
             <form action="/" method="post">
                 <button type="submit">By finish date</button>
                 <input type="hidden" name="sortedBy" value="dueToDate">
@@ -28,8 +28,8 @@
                 <button type="submit">By importance</button>
                 <input type="hidden" name="sortedBy" value="importance">
             </form>
-        </div>
-        <div>
+        </article>
+        <article>
             <form action="/" method="post">
                 <button type="submit">
                     {{#if showFinished}}Show{{else}}Hide{{/if}}
@@ -37,40 +37,45 @@
                 </button>
                 <input type="hidden" name="showFinished" value="true">
             </form>
-        </div>
+        </article>
     </section>
 </header>
-<main class="note-row">
+<main id="startpage">
     {{#if notes}}
         {{#each this.notes}}
-            <form action="/note/{{this._id}}" method="get">
-                <div>
-                    <input id="finished-note" type="checkbox" disabled {{#if this._finished}}checked{{/if}}>
-                    <label for="finished-note">Finished</label>
-                </div>
+            <article>
+                <form action="/note/{{this._id}}" method="get">
+                    <div class="note-content">
 
-                <div class="note-content-row">
-                    {{displayDate this._dueToDate}}
-                    <div class="note-content-title-row">
-                        <label for="note-text">{{this._title}}</label>
-                        <span>{{this._importance}}</span>
+                        <div class="note-header">
+                            <span><strong>{{this._title}}</strong></span>
+                            <span>Importance {{this._importance}}</span>
+                        </div>
+
+                        <div class="note-description">
+                            <label for="note-description"></label>
+                            <textarea id="note-description" rows="3" cols="40" disabled>{{this._description}}</textarea>
+                        </div>
+
+                        <div class="note-footer">
+                            <span>
+                                <input id="finished-note" type="checkbox" disabled {{#if this._finished}}checked{{/if}}>
+                                <label for="finished-note">Finished</label>
+                            </span>
+                            <span>{{displayDate this._dueToDate}}</span>
+                        </div>
+
                     </div>
-                    <div>
-                        <label for="note-description"></label>
-                        <textarea id="note-description" rows="3" cols="60" disabled>{{this._description}}</textarea>
-                    </div>
-                </div>
-                <div>
+
                     <button type="button" onclick="window.location.href='/note/{{this._id}}'">Edit</button>
-                </div>
-            </form>
+                </form>
+            </article>
         {{/each}}
     {{else}}
         {{#if showFinished}}
-            <p>No notes available yet!</p>
+            <p><strong>No notes available yet!</strong></p>
         {{else}}
-            <p>No open notes!</p>
+            <p><strong>No open notes!</strong></p>
         {{/if}}
-
     {{/if}}
 </main>
