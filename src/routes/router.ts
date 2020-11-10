@@ -1,5 +1,4 @@
 import express from 'express';
-
 import notesController from '../controllers/notesController';
 
 const router = express.Router();
@@ -13,7 +12,7 @@ router.post('/note', notesController.create);
 router.get('/note/:id', notesController.showNote)
 router.post('/note/:id', notesController.update);
 
-// Endpoints to make development easier
+// Endpoints to make testing easier
 router.get('/create-note', notesController.createSample);
 router.get('/reset', notesController.reset);
 

@@ -13,15 +13,11 @@ body, input, textarea, select, button, article {
     background-color: #191b1c;
 }
 
-::-webkit-scrollbar-thumb {
-    background-color: #484e51;
+::-webkit-scrollbar-thumb, button:hover {
+    background-color: #797063;
 }
 
 ::selection {
     background-color: #0051b3 !important;
     color: #f4f2ee !important;
-}
-
-button:hover {
-    background-color: #797063;
 }

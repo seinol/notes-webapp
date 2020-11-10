@@ -2,4 +2,4 @@
 
 Attestation for the module web engineering and design 2
 
-Simple plain javascript web application
+Node.JS Express application with handlebars and nedb.

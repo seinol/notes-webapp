@@ -34,6 +34,9 @@ button:hover {
     background-color: lightgrey;
 }
 
+
+/* Header */
+
 header section {
     display: flex;
     justify-content: space-between;
@@ -44,6 +47,9 @@ header article {
     display: flex;
     flex-wrap: wrap;
 }
+
+
+/* Startpage */
 
 #startpage {
     display: flex;
@@ -77,12 +83,15 @@ header article {
 }
 
 #startpage .note-header,
-.note-description,
-.note-footer {
+#startpage .note-description,
+#startpage .note-footer {
     display: flex;
     justify-content: space-between;
     margin-bottom: 10px;
 }
+
+
+/* Note create/detail */
 
 #note-view {
     margin: 0 auto;

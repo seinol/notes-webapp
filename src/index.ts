@@ -1,8 +1,8 @@
 import express from 'express';
 import session from 'express-session';
+import expressHbs from 'express-handlebars';
 import path from 'path';
 import router from './routes/router';
-import expressHbs from 'express-handlebars';
 import appConfigs from './config/app';
 
 const app = express();
@@ -10,14 +10,21 @@ app.disable('x-powered-by');
 
 const hbs = expressHbs.create({
     helpers: {
-        'displayDate'(date: Date) {
-            return date.toISOString().substring(0, 10);
-        },
         'equal'(first: string, second: string, options: any) {
             return first === second ? options.fn() : options.inverse()
         },
         'equalNumber'(first: number, second: number, options: any) {
             return first === second ? options.fn() : options.inverse()
+        },
+        'displayDate'(date: Date) {
+            return date.toISOString().substring(0, 10);
+        },
+        'displayImportance'(count: number) {
+            let starsSequence = '';
+            for (let i = 0; i < count; ++i) {
+                starsSequence += ' ' + appConfigs.IMPORTANCE_ICON
+            }
+            return starsSequence
         }
     }
 })

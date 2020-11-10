@@ -1,5 +1,5 @@
-import notesService from '../services/notesService';
 import { Request, Response } from 'express';
+import notesService from '../services/notesService';
 import Note from '../services/Note';
 
 async function index({session}: Request, res: Response) {

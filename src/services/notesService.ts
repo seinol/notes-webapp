@@ -1,6 +1,5 @@
 import Datastore from 'nedb-promises';
 import Note from './Note';
-import Nedb from 'nedb-promises';
 
 const db = new Datastore({filename: './data/notes.db', autoload: false});
 
@@ -8,7 +7,7 @@ async function getOne(id: string): Promise<Note> {
     return db.findOne({_id: id});
 }
 
-//TODO fix return types
+//TODO fix return types for all getAll functions
 async function getAllSortedByDueToDate(ascending: boolean, includeFinished: boolean): Promise<any> /*Promise<Nedb.Cursor<Document[]>>*/ {
     if (includeFinished) {
         return db.find({}).sort({_dueToDate: ascending ? 1 : -1});
